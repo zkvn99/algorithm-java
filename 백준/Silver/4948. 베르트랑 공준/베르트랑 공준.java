@@ -2,42 +2,38 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
+    static final int MAX = 246912;
+    static boolean[] isNotPrime = new boolean[MAX + 1];
     public static void main(String[] args) throws IOException {
+        sieve();
+        
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
         while (true) {
             int n = Integer.parseInt(br.readLine());
+            if (n == 0) break;
             
-            if (n == 0) {
-                return;
-            }
-            
-            System.out.println(primeCnt(n));
-        }
-    }
-    
-    static int primeCnt(int num) {
-        int max = num * 2;
-        int cnt = 0;
-        num++;
-        
-        while (num <= max) {
-            boolean primeChk = true;
-        
-            for (int i = 2; i*i <= num; i++) {
-                if (num % i == 0) {
-                    primeChk = false;
-                    break;
+            int cnt = 0;
+            for (int i = n + 1; i <= n * 2; i++) {
+                if (!isNotPrime[i]) {
+                    cnt++;
                 }
             }
             
-            if (num < 2) {
-                primeChk = false;
-            }
-            
-            if (primeChk) cnt++;
-            num++;
+            System.out.println(cnt);
         }
+    }
+    
+    static void sieve() {
+        isNotPrime[0] = true;
+        isNotPrime[1] = true;
         
-        return cnt;
+        for (int i = 2; i * i <= MAX; i++) {
+            if (!isNotPrime[i]) {
+                for (int j = i * i; j <= MAX; j += i) {
+                    isNotPrime[j] = true;
+                }
+            }
+        }
     }
 }
