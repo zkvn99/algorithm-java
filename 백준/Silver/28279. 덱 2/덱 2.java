@@ -1,54 +1,45 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int lineCount = Integer.parseInt(br.readLine());
         ArrayDeque<Integer> deque = new ArrayDeque<>();
-        
+        StringBuilder sb = new StringBuilder();
+
         for (int i = 0; i < lineCount; i++) {
             String line = br.readLine();
-            
-            if (line.startsWith("1")) {
-                int num = Integer.parseInt(line.split(" ")[1]);
-                deque.addFirst(num);
-            } else if (line.startsWith("2")) {
-                int num = Integer.parseInt(line.split(" ")[1]);
-                deque.addLast(num);
-            } else if (line.startsWith("3")) {
-                if (deque.isEmpty()) {
-                    System.out.println("-1");
-                } else {
-                    System.out.println(deque.removeFirst());
-                }
-            } else if (line.startsWith("4")) {
-                if (deque.isEmpty()) {
-                    System.out.println("-1");
-                } else {
-                    System.out.println(deque.removeLast());
-                }
-            } else if (line.startsWith("5")) {
-                System.out.println(deque.size());
-            } else if (line.startsWith("6")) {
-                if (deque.isEmpty()) {
-                    System.out.println("1");
-                } else {
-                    System.out.println("0");
-                }
-            } else if (line.startsWith("7")) {
-                if (deque.isEmpty()) {
-                    System.out.println("-1");
-                } else {
-                    System.out.println(deque.getFirst());
-                }
-            } else if (line.startsWith("8")) {
-                if (deque.isEmpty()) {
-                    System.out.println("-1");
-                } else {
-                    System.out.println(deque.getLast());
-                }
+            char cmd = line.charAt(0);
+
+            switch (cmd) {
+                case '1':
+                    deque.addFirst(Integer.parseInt(line.substring(2)));
+                    break;
+                case '2':
+                    deque.addLast(Integer.parseInt(line.substring(2)));
+                    break;
+                case '3':
+                    sb.append(deque.isEmpty() ? -1 : deque.removeFirst()).append("\n");
+                    break;
+                case '4':
+                    sb.append(deque.isEmpty() ? -1 : deque.removeLast()).append("\n");
+                    break;
+                case '5':
+                    sb.append(deque.size()).append("\n");
+                    break;
+                case '6':
+                    sb.append(deque.isEmpty() ? 1 : 0).append("\n");
+                    break;
+                case '7':
+                    sb.append(deque.isEmpty() ? -1 : deque.getFirst()).append("\n");
+                    break;
+                case '8':
+                    sb.append(deque.isEmpty() ? -1 : deque.getLast()).append("\n");
+                    break;
             }
         }
+
+        System.out.print(sb);
     }
 }
