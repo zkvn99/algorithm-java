@@ -1,0 +1,6 @@
+-- 코드를 입력하세요
+SELECT COUNT(*) as USERS FROM USER_INFO 
+    WHERE JOINED >= "2021-01-01" 
+    and JOINED < "2022-01-01" 
+    and AGE IS NOT NULL 
+    AND AGE BETWEEN 20 AND 29
