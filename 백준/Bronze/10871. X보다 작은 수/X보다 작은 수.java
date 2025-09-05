@@ -1,29 +1,25 @@
 import java.util.*;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer firstLine = new StringTokenizer(br.readLine());
+        StringTokenizer secondLine = new StringTokenizer(br.readLine());
         
-        int N = scan.nextInt();
-        int X = scan.nextInt();
+        int N = Integer.parseInt(firstLine.nextToken());
+        int X = Integer.parseInt(firstLine.nextToken());
+        int number = 0;
+        StringBuilder sb = new StringBuilder();
         
-        scan.nextLine(); 
-
-        String secondLine = scan.nextLine();   
-        String[] parts = secondLine.split(" ");
-        
-        String result = "";
-        
-        for (String n : parts) {
-            if (Integer.parseInt(n) < X) {
-                if (result.equals("")) {
-                    result += n;
-                } else {
-                    result += " " + n;
-                }
+        for (int i = 0; i < N; i++) {
+            number = Integer.parseInt(secondLine.nextToken());
+            
+            if (number < X) {
+                sb.append(number).append(" ");
             }
         }
         
-        System.out.println(result);
+        System.out.println(sb.toString().trim());
     }
 }
