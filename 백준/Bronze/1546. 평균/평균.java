@@ -1,23 +1,24 @@
 import java.util.*;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        double[] score = new double[N];
+        double max = 0;
+        for (int i = 0; i < N; i++) {
+            score[i] = Integer.parseInt(st.nextToken());
+            max = Math.max(score[i], max);
+        }
         
-        int cnt = scan.nextInt();
-        int max = 0;
         double sum = 0;
-        int[] score = new int[cnt];
-        
-        for (int i=0; i<cnt; i++) {
-            score[i] = scan.nextInt();
-            if (score[i] > max) max = score[i];
+        for (int j = 0; j < N; j++) {
+            sum += score[j] / max * 100;
         }
         
-        for (int i=0; i<cnt; i++) {
-            sum += (double) score[i] / max * 100;
-        }
-        
-        System.out.println(sum / cnt);
+        System.out.print(sum / N);
     }
 }
